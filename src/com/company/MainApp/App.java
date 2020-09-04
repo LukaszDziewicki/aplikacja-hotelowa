@@ -13,7 +13,6 @@ public class App extends JFrame {
     private static boolean clicked_Night = false;
     protected JMenu operationsMenu = new JMenu("Operations");
     protected JMenuItem logoutItem = new JMenuItem("Logout");
-    protected JMenuItem statisticsItem = new JMenuItem("Statistics");
     protected JMenuBar bar = new JMenuBar();
     protected JButton nightButton = new JButton("Light/Dark");
     protected JButton databaseUpdateButton = new JButton("Update");
@@ -55,7 +54,6 @@ public class App extends JFrame {
     }
 
     private void setMenuBar() {
-        operationsMenu.add(statisticsItem);
         operationsMenu.add(logoutItem);
     }
 
@@ -156,24 +154,11 @@ public class App extends JFrame {
         }
     }
 
-    private void addStatisticsItemListener() {
-        statisticsItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ConnectionDatabase connectionDatabase = new ConnectionDatabase();
-                connectionDatabase.updateDatabase(room, room.length);
-                StatisticsForm statisticsForm = new StatisticsForm(getLoginId(), room);
-                statisticsForm.setVisible(true);
-            }
-        });
-    }
-
     private void addListeners() {
         addRoomsButtonListener();
         addNightButtonLister();
         addLogoutItemListener();
         addDatabaseUpdateButtonListener();
-        addStatisticsItemListener();
 
     }
 
