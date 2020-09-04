@@ -1,6 +1,8 @@
 package com.company;
 
+import com.company.Const.DateHelper;
 import com.company.Const.Price;
+import com.company.MainApp.SelectDate;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -21,10 +23,15 @@ public class ReservationForm extends JFrame {
     private JTextField arrivalDateField;
     private JTextPane priceTextPane;
     private JTextField surnameField;
+
+
+    public  JButton dateButton;
     private JButton makeReservationButton = new JButton("Make Reservation");
     private JLabel availableRoomsLabel = new JLabel("Available rooms :");
     private JFrame freeRoomsFrame = new JFrame("Available Rooms");
     private JPanel freeRoomsPanel = new JPanel();
+    private String date;
+
 
     public ReservationForm() {
         super("Making Reservation");
@@ -80,11 +87,22 @@ public class ReservationForm extends JFrame {
                 }
             }
         });
+
+        dateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+              SelectDate selectDate =  new SelectDate();
+
+            }
+        });
     }
+
+
 
     public Room createReservationRoom() {
         Room reservationRoom = new Room();
-        Room.setArrivalDate(arrivalDateField.getText().trim());
+
+        Room.setArrivalDate(DateHelper.date);
         Room.setHowManyDays(Integer.parseInt(howManyDaysField.getText().trim()));
         reservationRoom.setName(nameField.getText().trim());
         reservationRoom.setSurname(surnameField.getText().trim());
@@ -142,5 +160,13 @@ public class ReservationForm extends JFrame {
 
     public JPanel getMakeReservationPanel() {
         return makeReservationPanel;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }
